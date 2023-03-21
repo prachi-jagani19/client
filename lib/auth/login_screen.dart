@@ -3,23 +3,29 @@ import 'package:client/bottom_screen.dart';
 import 'package:client/utils/color_utils.dart';
 import 'package:client/utils/font_style_utils.dart';
 import 'package:client/utils/size_config_utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  String id;
+  LoginScreen({required this.id});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final _auth = FirebaseAuth.instance;
   bool isCheckPassword = true;
   final formkey = GlobalKey<FormState>();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    String id = widget.id;
     return GestureDetector(
       onTapDown: (_) => FocusManager.instance.primaryFocus?.unfocus(),
       behavior: HitTestBehavior.translucent,
@@ -79,6 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Padding(
                 padding: EdgeInsets.only(left: 6.w, right: 6.w, top: 11.w),
                 child: TextFormField(
+                  controller: emailController,
                   textInputAction: TextInputAction.next,
                   cursorColor: ColorUtils.primaryColor,
                   validator: (v) {
@@ -172,9 +179,16 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               SizeConfig.sH3,
               InkWell(
-                onTap: () {
+                onTap: () async {
                   FocusScope.of(context).requestFocus();
                   if (formkey.currentState!.validate()) {
+                    final newUser = await _auth.signInWithEmailAndPassword(
+                        email: emailController.text,
+                        password: passwordController.text);
+                    final pref = await SharedPreferences.getInstance();
+                    pref.setString("userId", _auth.currentUser!.uid);
+                    pref.setString("companyId", id);
+
                     Get.showSnackbar(
                       GetSnackBar(
                         message: "Login Succesfully",
@@ -221,7 +235,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   TextButton(
                       onPressed: () {
-                        Get.to(() => RegisterScreen());
+                        Get.to(() => RegisterScreen(id: id));
                       },
                       child: Text(
                         "Sign Up",

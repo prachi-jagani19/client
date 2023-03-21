@@ -44,6 +44,14 @@ dependencies:
   provider:
   fullscreen: ^1.0.3
   lottie: ^2.2.0
+  firebase_core: ^2.7.0
+  firebase_database: ^10.0.14
+  firebase_core_platform_interface: 4.5.3
+  firebase_storage:
+  permission_handler:
+  flutter_lints: ^2.0.0
+  firebase_auth: ^4.2.9
+  cloud_firestore:
 
 dev_dependencies:
   flutter_test:

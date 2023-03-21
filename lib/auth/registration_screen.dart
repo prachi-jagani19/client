@@ -2,12 +2,15 @@ import 'package:client/auth/login_screen.dart';
 import 'package:client/utils/color_utils.dart';
 import 'package:client/utils/font_style_utils.dart';
 import 'package:client/utils/size_config_utils.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({Key? key}) : super(key: key);
+  String id;
+  RegisterScreen({required this.id});
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -20,8 +23,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController mobileNumberController = TextEditingController();
+  final _auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
+    String id = widget.id;
     return GestureDetector(
       onTapDown: (_) => FocusManager.instance.primaryFocus?.unfocus(),
       behavior: HitTestBehavior.translucent,
@@ -219,9 +224,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 SizeConfig.sH3,
                 InkWell(
-                  onTap: () {
+                  onTap: () async {
                     FocusScope.of(context).requestFocus();
                     if (formkey.currentState!.validate()) {
+                      final newuser =
+                          await _auth.createUserWithEmailAndPassword(
+                              email: emailController.text,
+                              password: passwordController.text);
+                      FirebaseFirestore.instance
+                          .collection(id)
+                          .doc(id)
+                          .collection('Client')
+                          .doc(_auth.currentUser!.uid)
+                          .set({
+                        'Name': nameController.text,
+                        'Phone': mobileNumberController.text,
+                        'Email': emailController.text,
+                        'password': passwordController.text,
+                        'Uid': _auth.currentUser!.uid,
+                      });
+
                       Get.showSnackbar(
                         GetSnackBar(
                           message: "Register Succesfully",
@@ -236,7 +258,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       Future.delayed(
                         const Duration(seconds: 3),
                         () {
-                          Get.to(() => const LoginScreen());
+                          Get.to(() => LoginScreen(id: id));
                         },
                       );
                     }
@@ -268,7 +290,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     TextButton(
                         onPressed: () {
-                          Get.to(() => LoginScreen());
+                          Get.to(() => LoginScreen(id: id));
                         },
                         child: Text(
                           "Sign In",

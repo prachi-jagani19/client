@@ -9,7 +9,8 @@ import 'package:lottie/lottie.dart';
 import 'package:sizer/sizer.dart';
 
 class OnBoardingScreen extends StatefulWidget {
-  const OnBoardingScreen({Key? key}) : super(key: key);
+  String id;
+   OnBoardingScreen({required this. id}) ;
 
   @override
   State<OnBoardingScreen> createState() => _OnBoardingScreenState();
@@ -18,6 +19,7 @@ class OnBoardingScreen extends StatefulWidget {
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
   @override
   Widget build(BuildContext context) {
+    String id =widget.id;
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 5.w),
@@ -54,7 +56,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               padding: EdgeInsets.symmetric(horizontal: 7.w),
               child: InkWell(
                 onTap: () {
-                  Get.to(() => LoginScreen());
+                  Get.to(() => LoginScreen(id:id));
                 },
                 child: Container(
                   height: 6.h,
@@ -85,7 +87,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               padding: EdgeInsets.symmetric(horizontal: 7.w),
               child: InkWell(
                 onTap: () {
-                  Get.to(() => RegisterScreen());
+                  Get.to(() => RegisterScreen(id:id));
                 },
                 child: Container(
                   height: 6.h,
