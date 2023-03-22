@@ -1,14 +1,10 @@
-import 'package:client/bottom_screen.dart';
 import 'package:client/change_theme/model_theme.dart';
 import 'package:client/company_list_screen.dart';
-import 'package:client/onBoarding_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-
-import 'auth/login_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
