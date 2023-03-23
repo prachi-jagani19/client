@@ -1,4 +1,8 @@
 import 'package:client/change_theme/model_theme.dart';
+import 'package:client/status/Checking_screen.dart';
+import 'package:client/status/Done.dart';
+import 'package:client/status/inprocess_screen.dart';
+import 'package:client/status/todo_screen.dart';
 import 'package:client/utils/color_utils.dart';
 import 'package:client/utils/font_style_utils.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +10,8 @@ import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
 class TaskScreen extends StatefulWidget {
-  const TaskScreen({Key? key}) : super(key: key);
+  var Project;
+  TaskScreen({Key? key, this.Project}) : super(key: key);
 
   @override
   State<TaskScreen> createState() => _TaskScreenState();
@@ -17,6 +22,7 @@ class _TaskScreenState extends State<TaskScreen> {
   Widget build(BuildContext context) {
     return Consumer<ModelTheme>(
         builder: (context, ModelTheme themeNotifier, child) {
+      String Project = widget.Project;
       return DefaultTabController(
           length: 4,
           child: Scaffold(
@@ -76,21 +82,13 @@ class _TaskScreenState extends State<TaskScreen> {
                       ),
                     ),
                   ),
-                  const Expanded(
+                  Expanded(
                       child: TabBarView(
                     children: [
-                      Center(
-                        child: Text("To Do"),
-                      ),
-                      Center(
-                        child: Text("Process"),
-                      ),
-                      Center(
-                        child: Text("Checking"),
-                      ),
-                      Center(
-                        child: Text("Done"),
-                      ),
+                      TodoScreen(Project: Project),
+                      InProcess(Project: Project),
+                      Checking(Project: Project),
+                      Done(Project: Project),
                     ],
                   ))
                 ],

@@ -75,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 vertical: 2.w, horizontal: 5.w),
                             child: InkWell(
                               onTap: () {
-                                Get.to(() => TaskScreen());
+                                Get.to(() => TaskScreen(Project:data['PROJECT NAME']));
                               },
                               child: Container(
                                 height: 18.w,
