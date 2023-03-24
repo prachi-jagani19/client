@@ -3,6 +3,7 @@ import 'package:client/bottom_screen.dart';
 import 'package:client/utils/color_utils.dart';
 import 'package:client/utils/font_style_utils.dart';
 import 'package:client/utils/size_config_utils.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,6 +19,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  late String abcd = "aa";
   final _auth = FirebaseAuth.instance;
   bool isCheckPassword = true;
   final formkey = GlobalKey<FormState>();
@@ -186,24 +188,52 @@ class _LoginScreenState extends State<LoginScreen> {
                     final pref = await SharedPreferences.getInstance();
                     pref.setString("userId", _auth.currentUser!.uid);
                     pref.setString("companyId", id);
+                    final QuerySnapshot result = await FirebaseFirestore
+                        .instance
+                        .collection(id)
+                        .doc(id)
+                        .collection('Client')
+                        .get();
+                    final List<DocumentSnapshot> documents = result.docs;
 
-                    Get.showSnackbar(
-                      GetSnackBar(
-                        message: "Login Succesfully",
-                        borderRadius: 10.0,
-                        margin:
-                            EdgeInsets.only(left: 4.w, right: 4.w, bottom: 4.w),
-                        snackPosition: SnackPosition.BOTTOM,
-                        backgroundColor: ColorUtils.primaryColor,
-                        duration: const Duration(seconds: 2),
-                      ),
-                    );
-                    Future.delayed(
-                      const Duration(seconds: 3),
-                      () {
-                        Get.to(() => const BottomScreen());
-                      },
-                    );
+                    for (var doc in documents) {
+                      print("id is  " + doc.id);
+                      if (_auth.currentUser!.uid == doc.id) {
+                        abcd = doc.id;
+                        break;
+                      }
+                    }
+                    if (abcd == _auth.currentUser!.uid) {
+                      Get.showSnackbar(
+                        GetSnackBar(
+                          message: "Login Succesfully",
+                          borderRadius: 10.0,
+                          margin: EdgeInsets.only(
+                              left: 4.w, right: 4.w, bottom: 4.w),
+                          snackPosition: SnackPosition.BOTTOM,
+                          backgroundColor: ColorUtils.primaryColor,
+                          duration: const Duration(seconds: 2),
+                        ),
+                      );
+                      Future.delayed(
+                        const Duration(seconds: 3),
+                        () {
+                          Get.to(() => const BottomScreen());
+                        },
+                      );
+                    } else {
+                      Get.showSnackbar(
+                        GetSnackBar(
+                          message: "Please select your company",
+                          borderRadius: 10.0,
+                          margin: EdgeInsets.only(
+                              left: 4.w, right: 4.w, bottom: 4.w),
+                          snackPosition: SnackPosition.BOTTOM,
+                          backgroundColor: ColorUtils.primaryColor,
+                          duration: const Duration(seconds: 2),
+                        ),
+                      );
+                    }
                   }
                 },
                 child: Container(
