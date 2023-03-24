@@ -25,11 +25,11 @@ class _BottomScreenState extends State<BottomScreen> {
   var myIndex = 0;
   @override
   Widget build(BuildContext context) {
-    SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(
+    SystemUiOverlayStyle systemUiOverlayStyle = const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarBrightness: Brightness.light,
         systemNavigationBarIconBrightness: Brightness.dark,
-        systemNavigationBarColor: Colors.black26,
+        systemNavigationBarColor: Colors.black,
         systemNavigationBarContrastEnforced: false,
         systemStatusBarContrastEnforced: false,
         systemNavigationBarDividerColor: Colors.transparent);
@@ -46,8 +46,8 @@ class _BottomScreenState extends State<BottomScreen> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           backgroundColor:
-              themeNotifier.isDark ? Colors.black26 : ColorUtils.primaryColor,
-          title: Text("hftyvbjnm"),
+              themeNotifier.isDark ? Colors.black : ColorUtils.primaryColor,
+          title: const Text("Projecture"),
           centerTitle: true,
           actions: [
             Padding(
@@ -72,9 +72,7 @@ class _BottomScreenState extends State<BottomScreen> {
                   color: ColorUtils.black.withOpacity(0.2),
                   blurRadius: 5.0)
             ],
-            color: themeNotifier.isDark
-                ? Colors.black12.withOpacity(0.2)
-                : Colors.white,
+            color: themeNotifier.isDark ? Colors.black : Colors.white,
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -85,29 +83,16 @@ class _BottomScreenState extends State<BottomScreen> {
                     myIndex = 0;
                   });
                 },
-                child: Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                        height: 0.5.h,
-                        width: 10.w,
-                        decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.only(
-                              bottomLeft: Radius.circular(10),
-                              bottomRight: Radius.circular(10)),
-                          color: themeNotifier.isDark
-                              ? myIndex == 0
-                                  ? ColorUtils.purple
-                                  : ColorUtils.white
-                              : myIndex == 0
-                                  ? ColorUtils.purple
-                                  : ColorUtils.primaryColor,
-                        ),
-                      ),
-                      SizeConfig.sH05,
-                      Icon(
-                        Icons.home,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      height: 0.5.h,
+                      width: 10.w,
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.only(
+                            bottomLeft: Radius.circular(10),
+                            bottomRight: Radius.circular(10)),
                         color: themeNotifier.isDark
                             ? myIndex == 0
                                 ? ColorUtils.purple
@@ -116,20 +101,31 @@ class _BottomScreenState extends State<BottomScreen> {
                                 ? ColorUtils.purple
                                 : ColorUtils.primaryColor,
                       ),
-                      Text(
-                        "Home",
-                        style: FontTextStyle.Proxima14Regular.copyWith(
-                          color: themeNotifier.isDark
-                              ? myIndex == 0
-                                  ? ColorUtils.purple
-                                  : ColorUtils.white
-                              : myIndex == 0
-                                  ? ColorUtils.purple
-                                  : ColorUtils.primaryColor,
-                        ),
-                      )
-                    ],
-                  ),
+                    ),
+                    SizeConfig.sH05,
+                    Icon(
+                      Icons.home,
+                      color: themeNotifier.isDark
+                          ? myIndex == 0
+                              ? ColorUtils.purple
+                              : ColorUtils.white
+                          : myIndex == 0
+                              ? ColorUtils.purple
+                              : ColorUtils.primaryColor,
+                    ),
+                    Text(
+                      "Home",
+                      style: FontTextStyle.Proxima14Regular.copyWith(
+                        color: themeNotifier.isDark
+                            ? myIndex == 0
+                                ? ColorUtils.purple
+                                : ColorUtils.white
+                            : myIndex == 0
+                                ? ColorUtils.purple
+                                : ColorUtils.primaryColor,
+                      ),
+                    )
+                  ],
                 ),
               ),
               GestureDetector(
@@ -138,29 +134,16 @@ class _BottomScreenState extends State<BottomScreen> {
                     myIndex = 1;
                   });
                 },
-                child: Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                        height: 0.5.h,
-                        width: 10.w,
-                        decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.only(
-                              bottomLeft: Radius.circular(10),
-                              bottomRight: Radius.circular(10)),
-                          color: themeNotifier.isDark
-                              ? myIndex == 1
-                                  ? ColorUtils.purple
-                                  : ColorUtils.white
-                              : myIndex == 1
-                                  ? ColorUtils.purple
-                                  : ColorUtils.primaryColor,
-                        ),
-                      ),
-                      SizeConfig.sH05,
-                      Icon(
-                        Icons.chat,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      height: 0.5.h,
+                      width: 10.w,
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.only(
+                            bottomLeft: Radius.circular(10),
+                            bottomRight: Radius.circular(10)),
                         color: themeNotifier.isDark
                             ? myIndex == 1
                                 ? ColorUtils.purple
@@ -169,20 +152,31 @@ class _BottomScreenState extends State<BottomScreen> {
                                 ? ColorUtils.purple
                                 : ColorUtils.primaryColor,
                       ),
-                      Text(
-                        "Chat",
-                        style: FontTextStyle.Proxima14Regular.copyWith(
-                          color: themeNotifier.isDark
-                              ? myIndex == 1
-                                  ? ColorUtils.purple
-                                  : ColorUtils.white
-                              : myIndex == 1
-                                  ? ColorUtils.purple
-                                  : ColorUtils.primaryColor,
-                        ),
-                      )
-                    ],
-                  ),
+                    ),
+                    SizeConfig.sH05,
+                    Icon(
+                      Icons.chat,
+                      color: themeNotifier.isDark
+                          ? myIndex == 1
+                              ? ColorUtils.purple
+                              : ColorUtils.white
+                          : myIndex == 1
+                              ? ColorUtils.purple
+                              : ColorUtils.primaryColor,
+                    ),
+                    Text(
+                      "Chat",
+                      style: FontTextStyle.Proxima14Regular.copyWith(
+                        color: themeNotifier.isDark
+                            ? myIndex == 1
+                                ? ColorUtils.purple
+                                : ColorUtils.white
+                            : myIndex == 1
+                                ? ColorUtils.purple
+                                : ColorUtils.primaryColor,
+                      ),
+                    )
+                  ],
                 ),
               ),
             ],
