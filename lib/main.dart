@@ -1,5 +1,6 @@
 import 'package:client/change_theme/model_theme.dart';
 import 'package:client/company_list_screen.dart';
+import 'package:client/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -26,12 +27,18 @@ class MyApp extends StatelessWidget {
           builder: (BuildContext context, Orientation orientation,
               DeviceType deviceType) {
             return GetMaterialApp(
+              builder: (context, child) {
+                return MediaQuery(
+                  data: MediaQuery.of(context).copyWith(textScaleFactor: 1),
+                  child: child!,
+                );
+              },
               title: 'Projecture',
               theme: themeNotifier.isDark
                   ? ThemeData(brightness: Brightness.dark)
                   : ThemeData(brightness: Brightness.light),
               debugShowCheckedModeBanner: false,
-              home: CompanyListScreen(),
+              home: SplashScreen(),
               // home: CompanyListScreen(),
             );
           },

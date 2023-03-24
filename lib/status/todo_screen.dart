@@ -77,19 +77,52 @@ class _TodoScreenState extends State<TodoScreen> {
                                   child: Container(
                                       width: Get.width,
                                       decoration: BoxDecoration(
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: ColorUtils.black
-                                                  .withOpacity(0.2),
-                                              spreadRadius: 0.5,
-                                              blurRadius: 9.0,
-                                              offset: const Offset(0,
-                                                  3), // changes position of shadow
-                                            ),
-                                          ],
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          color: ColorUtils.white),
+                                        // gradient: LinearGradient(
+                                        //   begin: Alignment.centerLeft,
+                                        //   end: Alignment.centerRight,
+                                        //   colors: [
+                                        //     ColorUtils.purple,
+                                        //     ColorUtils.purpleColor,
+                                        //     ColorUtils.purpleColor
+                                        //         .withOpacity(0.5)
+                                        //   ],
+                                        // ),
+                                        gradient: LinearGradient(
+                                            begin: Alignment.topLeft,
+                                            end: Alignment.bottomCenter,
+                                            colors: [
+                                              Colors.deepPurple.shade300,
+                                              Colors.deepPurple.shade200,
+                                              Colors.deepPurple.shade500,
+                                              Colors.deepPurple.shade500,
+                                            ],
+                                            stops: const [
+                                              0.1,
+                                              0.3,
+                                              0.9,
+                                              1.0
+                                            ]),
+                                        // boxShadow: [
+                                        //   BoxShadow(
+                                        //     color: ColorUtils.black5A
+                                        //         .withOpacity(0.6),
+                                        //     spreadRadius: 0.5,
+                                        //     blurRadius: 9.0,
+                                        //     offset: const Offset(0,
+                                        //         3), // changes position of shadow
+                                        //   ),
+                                        // ],
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.deepPurple.shade400,
+                                            offset: const Offset(0, 3),
+                                            blurRadius: 15,
+                                            spreadRadius: -5,
+                                          ),
+                                        ],
+                                        borderRadius: BorderRadius.circular(10),
+                                        // color: ColorUtils.white
+                                      ),
                                       child: Padding(
                                         padding: EdgeInsets.only(
                                             left: 3.w, bottom: 2.h),
@@ -101,12 +134,12 @@ class _TodoScreenState extends State<TodoScreen> {
                                             Row(
                                               children: [
                                                 Text(
-                                                  "Task Name :",
+                                                  "Task Name : ",
                                                   style: FontTextStyle
                                                           .Proxima16Medium
                                                       .copyWith(
-                                                          color: ColorUtils
-                                                              .primaryColor),
+                                                          color:
+                                                              ColorUtils.white),
                                                 ),
                                                 Text(
                                                   data['task'],
@@ -115,8 +148,8 @@ class _TodoScreenState extends State<TodoScreen> {
                                                       .copyWith(
                                                           fontWeight:
                                                               FontWeight.bold,
-                                                          color: ColorUtils
-                                                              .primaryColor),
+                                                          color:
+                                                              ColorUtils.white),
                                                 ),
                                               ],
                                             ),
@@ -139,22 +172,33 @@ class _TodoScreenState extends State<TodoScreen> {
                                                       ],
                                                     ),
                                                   )
-                                                : Image.network(
-                                                    data['Image'],
-                                                    height: 25.h,
-                                                    width: 50.w,
-                                                    fit: BoxFit.fill,
+                                                : Center(
+                                                    child: Container(
+                                                      height: 26.h,
+                                                      width: 51.w,
+                                                      decoration: BoxDecoration(
+                                                          border: Border.all(
+                                                              width: 5,
+                                                              color: ColorUtils
+                                                                  .white)),
+                                                      child: Image.network(
+                                                        data['Image'],
+                                                        height: 25.h,
+                                                        width: 50.w,
+                                                        fit: BoxFit.fill,
+                                                      ),
+                                                    ),
                                                   ),
                                             SizeConfig.sH2,
                                             Row(
                                               children: [
                                                 Text(
-                                                  "AssignDate :",
+                                                  "AssignDate : ",
                                                   style: FontTextStyle
                                                           .Proxima16Medium
                                                       .copyWith(
-                                                          color: ColorUtils
-                                                              .primaryColor),
+                                                          color:
+                                                              ColorUtils.white),
                                                 ),
                                                 Text(
                                                   data['AssignDate'],
@@ -163,8 +207,8 @@ class _TodoScreenState extends State<TodoScreen> {
                                                       .copyWith(
                                                           fontWeight:
                                                               FontWeight.bold,
-                                                          color: ColorUtils
-                                                              .primaryColor),
+                                                          color:
+                                                              ColorUtils.white),
                                                 ),
                                               ],
                                             ),
@@ -172,12 +216,12 @@ class _TodoScreenState extends State<TodoScreen> {
                                             Row(
                                               children: [
                                                 Text(
-                                                  "Due Date :",
+                                                  "Due Date : ",
                                                   style: FontTextStyle
                                                           .Proxima16Medium
                                                       .copyWith(
-                                                          color: ColorUtils
-                                                              .primaryColor),
+                                                          color:
+                                                              ColorUtils.white),
                                                 ),
                                                 Text(
                                                   data['LastDate'],
@@ -186,8 +230,8 @@ class _TodoScreenState extends State<TodoScreen> {
                                                       .copyWith(
                                                           fontWeight:
                                                               FontWeight.bold,
-                                                          color: ColorUtils
-                                                              .primaryColor),
+                                                          color:
+                                                              ColorUtils.white),
                                                 ),
                                               ],
                                             ),
@@ -195,12 +239,12 @@ class _TodoScreenState extends State<TodoScreen> {
                                             Row(
                                               children: [
                                                 Text(
-                                                  "User Name  :",
+                                                  "User Name  : ",
                                                   style: FontTextStyle
                                                           .Proxima16Medium
                                                       .copyWith(
-                                                          color: ColorUtils
-                                                              .primaryColor),
+                                                          color:
+                                                              ColorUtils.white),
                                                 ),
                                                 Text(
                                                   data['Email'],
@@ -209,32 +253,39 @@ class _TodoScreenState extends State<TodoScreen> {
                                                       .copyWith(
                                                           fontWeight:
                                                               FontWeight.bold,
-                                                          color: ColorUtils
-                                                              .primaryColor),
+                                                          color:
+                                                              ColorUtils.white),
                                                 ),
                                               ],
                                             ),
-                                            SizeConfig.sH05,
+                                            SizeConfig.sH1,
                                             Container(
                                               decoration: BoxDecoration(
-                                                  color: Colors.yellow,
+                                                  border: Border.all(
+                                                      color: ColorUtils.white),
+                                                  color: ColorUtils
+                                                      .primaryColor,
                                                   borderRadius:
                                                       BorderRadius.all(
                                                           Radius.circular(
-                                                              10.0))),
+                                                              8.0))),
                                               child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(5.0),
+                                                padding: EdgeInsets.only(
+                                                    top: 0.5.h,
+                                                    left: 3.w,
+                                                    right: 3.w,
+                                                    bottom: 0.5.h),
                                                 child: Text(
                                                   data['Name'],
-                                                  style: FontTextStyle
-                                                          .Proxima16Medium
-                                                      .copyWith(
-                                                          fontWeight:
-                                                              FontWeightClass
-                                                                  .extraB,
-                                                          color: ColorUtils
-                                                              .primaryColor),
+                                                  style:
+                                                      FontTextStyle
+                                                              .Proxima16Medium
+                                                          .copyWith(
+                                                              // fontWeight:
+                                                              //     FontWeightClass
+                                                              //         .extraB,
+                                                              color: ColorUtils
+                                                                  .white),
                                                 ),
                                               ),
                                             ),

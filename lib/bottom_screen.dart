@@ -101,7 +101,7 @@ class _BottomScreenState extends State<BottomScreen> {
                                   ? ColorUtils.purple
                                   : ColorUtils.white
                               : myIndex == 0
-                                  ? Colors.red
+                                  ? ColorUtils.purple
                                   : ColorUtils.primaryColor,
                         ),
                       ),
@@ -113,7 +113,7 @@ class _BottomScreenState extends State<BottomScreen> {
                                 ? ColorUtils.purple
                                 : ColorUtils.white
                             : myIndex == 0
-                                ? Colors.red
+                                ? ColorUtils.purple
                                 : ColorUtils.primaryColor,
                       ),
                       Text(
@@ -124,7 +124,7 @@ class _BottomScreenState extends State<BottomScreen> {
                                   ? ColorUtils.purple
                                   : ColorUtils.white
                               : myIndex == 0
-                                  ? Colors.red
+                                  ? ColorUtils.purple
                                   : ColorUtils.primaryColor,
                         ),
                       )
@@ -154,7 +154,7 @@ class _BottomScreenState extends State<BottomScreen> {
                                   ? ColorUtils.purple
                                   : ColorUtils.white
                               : myIndex == 1
-                                  ? Colors.red
+                                  ? ColorUtils.purple
                                   : ColorUtils.primaryColor,
                         ),
                       ),
@@ -166,7 +166,7 @@ class _BottomScreenState extends State<BottomScreen> {
                                 ? ColorUtils.purple
                                 : ColorUtils.white
                             : myIndex == 1
-                                ? Colors.red
+                                ? ColorUtils.purple
                                 : ColorUtils.primaryColor,
                       ),
                       Text(
@@ -177,7 +177,7 @@ class _BottomScreenState extends State<BottomScreen> {
                                   ? ColorUtils.purple
                                   : ColorUtils.white
                               : myIndex == 1
-                                  ? Colors.red
+                                  ? ColorUtils.purple
                                   : ColorUtils.primaryColor,
                         ),
                       )

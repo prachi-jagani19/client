@@ -265,17 +265,33 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   },
                   child: Container(
                     height: 6.h,
-                    width: 40.w,
+                    width: 55.w,
                     decoration: BoxDecoration(
-                        color: ColorUtils.primaryColor,
-                        borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                        gradient: LinearGradient(
+                            colors: [
+                              ColorUtils.primaryColor,
+                              ColorUtils.primaryColor.withOpacity(0.5),
+                            ],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight),
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(10.0),
+                        ),
+                        boxShadow: const [
+                          BoxShadow(
+                              color: Colors.black12,
+                              offset: Offset(
+                                5,
+                                5,
+                              ),
+                              blurRadius: 10)
+                        ]),
                     child: Center(
-                      child: Text(
-                        "SIGN UP",
-                        style: FontTextStyle.Proxima16Medium.copyWith(
-                            color: ColorUtils.white),
-                      ),
-                    ),
+                        child: Text(
+                      "SIGN UP",
+                      style: FontTextStyle.Proxima16Medium.copyWith(
+                          color: ColorUtils.white),
+                    )),
                   ),
                 ),
                 SizeConfig.sH2,
