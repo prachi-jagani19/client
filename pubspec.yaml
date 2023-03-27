@@ -54,6 +54,7 @@ dependencies:
   flutter_lints: ^2.0.0
   firebase_auth: ^4.2.9
   cloud_firestore:
+  shimmer: ^2.0.0
 
 dev_dependencies:
   flutter_test:

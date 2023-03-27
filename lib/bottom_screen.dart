@@ -1,6 +1,7 @@
 import 'package:client/change_theme/model_theme.dart';
 import 'package:client/chat_screen.dart';
 import 'package:client/home_screen.dart';
+import 'package:client/shimmer_effect.dart';
 import 'package:client/utils/color_utils.dart';
 import 'package:client/utils/font_style_utils.dart';
 import 'package:client/utils/size_config_utils.dart';
@@ -19,6 +20,7 @@ class BottomScreen extends StatefulWidget {
 class _BottomScreenState extends State<BottomScreen> {
   var pageAll = [
     const HomeScreen(),
+    //todoShimmer(),
     const ChatScreen(),
   ];
 
@@ -98,7 +100,7 @@ class _BottomScreenState extends State<BottomScreen> {
                                 ? ColorUtils.purple
                                 : ColorUtils.white
                             : myIndex == 0
-                                ? ColorUtils.purple
+                                ? ColorUtils.purpleColor
                                 : ColorUtils.primaryColor,
                       ),
                     ),
@@ -110,7 +112,7 @@ class _BottomScreenState extends State<BottomScreen> {
                               ? ColorUtils.purple
                               : ColorUtils.white
                           : myIndex == 0
-                              ? ColorUtils.purple
+                              ? ColorUtils.purpleColor
                               : ColorUtils.primaryColor,
                     ),
                     Text(
@@ -121,7 +123,7 @@ class _BottomScreenState extends State<BottomScreen> {
                                 ? ColorUtils.purple
                                 : ColorUtils.white
                             : myIndex == 0
-                                ? ColorUtils.purple
+                                ? ColorUtils.purpleColor
                                 : ColorUtils.primaryColor,
                       ),
                     )
@@ -149,7 +151,7 @@ class _BottomScreenState extends State<BottomScreen> {
                                 ? ColorUtils.purple
                                 : ColorUtils.white
                             : myIndex == 1
-                                ? ColorUtils.purple
+                                ? ColorUtils.purpleColor
                                 : ColorUtils.primaryColor,
                       ),
                     ),
@@ -161,7 +163,7 @@ class _BottomScreenState extends State<BottomScreen> {
                               ? ColorUtils.purple
                               : ColorUtils.white
                           : myIndex == 1
-                              ? ColorUtils.purple
+                              ? ColorUtils.purpleColor
                               : ColorUtils.primaryColor,
                     ),
                     Text(
@@ -172,7 +174,7 @@ class _BottomScreenState extends State<BottomScreen> {
                                 ? ColorUtils.purple
                                 : ColorUtils.white
                             : myIndex == 1
-                                ? ColorUtils.purple
+                                ? ColorUtils.purpleColor
                                 : ColorUtils.primaryColor,
                       ),
                     )

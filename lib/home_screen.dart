@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:client/change_theme/model_theme.dart';
+import 'package:client/shimmer_effect.dart';
 import 'package:client/show_all_details.dart';
 import 'package:client/utils/color_utils.dart';
 import 'package:client/utils/font_style_utils.dart';
@@ -36,10 +37,18 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {});
   }
 
+  bool isShimmer = true;
+  Future durationShimmer() async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    isShimmer = false;
+    setState(() {});
+  }
+
   @override
   void initState() {
     setData();
     super.initState();
+    durationShimmer();
   }
 
   final _auth = FirebaseAuth.instance;
@@ -54,60 +63,70 @@ class _HomeScreenState extends State<HomeScreen> {
           behavior: const ScrollBehavior().copyWith(overscroll: false),
           child: SingleChildScrollView(
             child: cid != null
-                ? StreamBuilder<QuerySnapshot>(
-                    stream: FirebaseFirestore.instance
-                        .collection(cid!)
-                        .doc(cid)
-                        .collection('Client')
-                        .doc(_auth.currentUser!.uid)
-                        .collection('ClientProject')
-                        .snapshots(),
-                    builder: (context, snapshot) {
-                      return ListView.builder(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.vertical,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemCount: snapshot.data == null
-                            ? 0
-                            : snapshot.data!.docs.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          var data = snapshot.data!.docs[index];
-                          return Padding(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 2.w, horizontal: 5.w),
-                            child: InkWell(
-                              onTap: () {
-                                Get.to(() =>
-                                    TaskScreen(Project: data['PROJECT NAME']));
-                              },
-                              child: Container(
-                                height: 18.w,
-                                width: 55.w,
-                                decoration: const BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10.0)),
-                                    color: ColorUtils.purple),
-                                child: Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 5.w, vertical: 3.w),
-                                  child: Text(
-                                    data['PROJECT NAME'],
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 2,
-                                    style:
-                                        FontTextStyle.Proxima16Medium.copyWith(
-                                            color: ColorUtils.white,
-                                            decoration:
-                                                TextDecoration.underline),
+                ? isShimmer == true
+                    ? projectList()
+                    : StreamBuilder<QuerySnapshot>(
+                        stream: FirebaseFirestore.instance
+                            .collection(cid!)
+                            .doc(cid)
+                            .collection('Client')
+                            .doc(_auth.currentUser!.uid)
+                            .collection('ClientProject')
+                            .snapshots(),
+                        builder: (context, snapshot) {
+                          return ListView.builder(
+                            shrinkWrap: true,
+                            scrollDirection: Axis.vertical,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: snapshot.data == null
+                                ? 0
+                                : snapshot.data!.docs.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              var data = snapshot.data!.docs[index];
+                              return Padding(
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 2.w, horizontal: 5.w),
+                                child: InkWell(
+                                  onTap: () {
+                                    Get.to(() => TaskScreen(
+                                        Project: data['PROJECT NAME']));
+                                  },
+                                  child: Container(
+                                    height: 18.w,
+                                    width: 55.w,
+                                    decoration: const BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: ColorUtils.purple,
+                                            offset: Offset(0, 3),
+                                            blurRadius: 15,
+                                            spreadRadius: -5,
+                                          ),
+                                        ],
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                        color: ColorUtils.purple),
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 5.w, vertical: 3.w),
+                                      child: Text(
+                                        data['PROJECT NAME'],
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 2,
+                                        style: FontTextStyle.Proxima16Medium
+                                            .copyWith(
+                                          fontWeight: FontWeightClass.extraB,
+                                          color: ColorUtils.white,
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ),
+                              );
+                            },
                           );
-                        },
-                      );
-                    })
-                : SizedBox(),
+                        })
+                : const SizedBox(),
           ),
         ),
       );
