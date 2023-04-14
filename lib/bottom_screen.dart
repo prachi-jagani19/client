@@ -1,4 +1,5 @@
 import 'package:client/change_theme/model_theme.dart';
+import 'package:client/company_list_screen.dart';
 import 'package:client/home_screen.dart';
 import 'package:client/screens/chat/chat_screen.dart';
 import 'package:client/shimmer_effect.dart';
@@ -7,6 +8,8 @@ import 'package:client/utils/font_style_utils.dart';
 import 'package:client/utils/size_config_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
@@ -54,13 +57,89 @@ class _BottomScreenState extends State<BottomScreen> {
           actions: [
             Padding(
               padding: EdgeInsets.only(right: 2.w),
-              child: IconButton(
-                  onPressed: () {
-                    themeNotifier.isDark = !themeNotifier.isDark;
-                  },
-                  icon: Icon(themeNotifier.isDark
-                      ? Icons.nights_stay
-                      : Icons.wb_sunny)),
+              child: Row(
+                children: [
+                  IconButton(
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                backgroundColor: Colors.white,
+                                title: Column(
+                                  children: [
+                                    Text(
+                                      'Log out',
+                                      style: FontTextStyle.Proxima16Medium
+                                          .copyWith(
+                                              color: ColorUtils.primaryColor,
+                                              fontWeight:
+                                                  FontWeightClass.extraB,
+                                              fontSize: 13.sp),
+                                    ),
+                                    SizeConfig.sH1,
+                                  ],
+                                ),
+                                content: Text(
+                                    'are you sure you want to log out?',
+                                    style:
+                                        FontTextStyle.Proxima16Medium.copyWith(
+                                            color: ColorUtils.primaryColor)),
+                                actions: [
+                                  InkWell(
+                                    onTap: () {
+                                      Get.to(() => CompanyListScreen());
+                                    },
+                                    child: Container(
+                                      height: 10.w,
+                                      width: 25.w,
+                                      decoration: const BoxDecoration(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(8.0)),
+                                          color: ColorUtils.primaryColor),
+                                      child: const Center(
+                                        child: Text(
+                                          "Done",
+                                          style: TextStyle(
+                                              color: ColorUtils.white),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      Get.back();
+                                    },
+                                    child: Container(
+                                      height: 10.w,
+                                      width: 25.w,
+                                      decoration: const BoxDecoration(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(8.0)),
+                                          color: ColorUtils.primaryColor),
+                                      child: const Center(
+                                        child: Text(
+                                          "Cancel",
+                                          style: TextStyle(
+                                              color: ColorUtils.white),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              );
+                            });
+                      },
+                      icon: Icon(Icons.logout)),
+                  IconButton(
+                      onPressed: () {
+                        themeNotifier.isDark = !themeNotifier.isDark;
+                      },
+                      icon: Icon(themeNotifier.isDark
+                          ? Icons.nights_stay
+                          : Icons.wb_sunny)),
+                ],
+              ),
             )
           ],
         ),

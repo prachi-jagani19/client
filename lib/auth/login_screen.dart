@@ -92,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   cursorColor: ColorUtils.primaryColor,
                   validator: (v) {
                     if (v!.isEmpty) {
-                      return "please email required";
+                      return "Email required";
                     } else if (!RegExp(
                             r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]"
                             r"{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]"

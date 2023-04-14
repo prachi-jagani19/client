@@ -103,9 +103,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     controller: nameController,
                     validator: (v) {
                       if (v!.isEmpty) {
-                        return "please name required";
-                      } else if (!RegExp(r'^[a-zA-Z]+$').hasMatch(v)) {
-                        return "please valid name ";
+                        return "Name required";
+                      } else if (!RegExp(
+                              r'^[[A-Z]|[a-z]][[A-Z]|[a-z]|\\d|[_]]{7,29}$')
+                          .hasMatch(v)) {
+                        return "Enter valid name ";
                       }
                       return null;
                     },
@@ -130,7 +132,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     controller: emailController,
                     validator: (v) {
                       if (v!.isEmpty) {
-                        return "please email required";
+                        return "Email required";
                       } else if (!RegExp(
                               r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]"
                               r"{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]"
@@ -164,7 +166,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     validator: (v) {
                       // add your custom validation here.
                       if (v!.isEmpty) {
-                        return "please mobile number required";
+                        return "Mobile number required";
                       } else if (!RegExp(r'(^(?:[+0]9)?[0-9]{10,12}$)')
                           .hasMatch(v)) {
                         return "please enter 10 digits ";
@@ -193,8 +195,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       if (v!.isEmpty) {
                         return 'Please enter password';
                       }
-                      if (v.length <= 8) {
-                        return 'Password must be atleast 8 characters long';
+                      if (v.length <= 6) {
+                        return 'Password must be at least 6 characters long';
                       }
                     },
                     obscureText: isCheckPassword,
