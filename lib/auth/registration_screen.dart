@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
+import '../utils/const/function/local_notification_services.dart';
+
 class RegisterScreen extends StatefulWidget {
   String id;
   RegisterScreen({required this.id});
@@ -231,6 +233,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           await _auth.createUserWithEmailAndPassword(
                               email: emailController.text,
                               password: passwordController.text);
+                      String? fcmToken =
+                          await LocalNotificationServices.getFCMToken();
                       FirebaseFirestore.instance
                           .collection(id)
                           .doc(id)
@@ -242,6 +246,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         'Email': emailController.text,
                         'password': passwordController.text,
                         'Uid': _auth.currentUser!.uid,
+                      });
+                      FirebaseFirestore.instance
+                          .collection(id)
+                          .doc(id)
+                          .collection('user')
+                          .doc(_auth.currentUser!.uid)
+                          .set({
+                        'Name': nameController.text + "(Client)",
+                        'City': '',
+                        'DOB': '',
+                        'Email': emailController.text,
+                        'Phone': '',
+                        'Password': passwordController.text,
+                        'Uid': _auth.currentUser!.uid,
+                        'ProfileImage': "",
+                        'fcmToken': fcmToken ?? '',
                       });
 
                       Get.showSnackbar(
